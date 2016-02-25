@@ -67,15 +67,30 @@ meaning: not to get the "shrunken" text on mobile -->
 <body> 
 <script>
         $("document").ready( function(){
-          alert("SUSAN IS THE BEST")
-          //$("img").css("border", "3px solid green"); 
-          $("img:gt(1)").css("border", "3px solid aqua"); 
-          $("li").css("border", "3px solid green"); 
-          $("h1").css("border", "3px solid yellow"); 
-          $("footer").css("border", "6px solid teal"); 
-          $("img").addClass("error"); 
-         // $("img").slideUp(2000); 
+          
+        //create event bindings on All tab panel li buttons
+      $(".tab-panels .tabs li").on("click", function(){
+        //find and remove the active class for the unordered list item
+        $(".tab-panels .tabs li.active").removeClass("active");
+        //add the "active" class to the clicked element 
+        $(this).addClass("active"); 
+          
+        //find out which panel to show by using the current elements rel attritbute 
+        //assign the rel of the li to a variable for testing later
+        var panelToShow = $(this).attr("rel"); 
+          
+        //hide the current panel 
+        $(" .tab-panels .panel.active").slideUp(300, function(){
+          $(this).removeClass("active"); 
+          //show new panel
+          
+          $("#"+panelToShow).slideDown(300, function(){ 
+            $(this).addClass("active"); 
+          });
         });
+          
+      }); //end of event attach
+    });      
         </script>         
 	
 <header>
